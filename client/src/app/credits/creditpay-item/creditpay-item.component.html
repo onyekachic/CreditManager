@@ -1,0 +1,124 @@
+<h4 class="display-6">Credit Item</h4>
+<hr />
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <input
+    type="hidden"
+    name="creditID"
+    #creditID="ngModel"
+    [(ngModel)]="formData.creditID"
+  />
+  <input
+    type="hidden"
+    name="creditPayItemID"
+    #creditPayItemID="ngModel"
+    [(ngModel)]="formData.creditPayItemID"
+  />
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Repayment</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="repayAmt"
+          #repayAmt="ngModel"
+          [(ngModel)]="formData.repayAmt"
+          class="form-control"
+          (keyup)="updateTotal()"
+          [class.is-invalid]="!isValid && formData.repayAmt == 0"
+        />
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Transportation</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="pension"
+          #pension="ngModel"
+          [(ngModel)]="formData.pension"
+          class="form-control"
+          (keyup)="updateTotal()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Office Management</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="union"
+          #union="ngModel"
+          [(ngModel)]="formData.union"
+          class="form-control"
+          (keyup)="updateTotal()"
+        />
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Default</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="school"
+          #school="ngModel"
+          [(ngModel)]="formData.school"
+          class="form-control"
+          (keyup)="updateTotal()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Others</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="others"
+          #others="ngModel"
+          [(ngModel)]="formData.others"
+          class="form-control"
+          (keyup)="updateTotal()"
+        />
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Total</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input
+          name="total"
+          #total="ngModel"
+          [(ngModel)]="formData.total"
+          class="form-control"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="for-group">
+    <button type="submit" class="btn btn-dark">
+      <i class="fa fa-database"></i> Submit
+    </button>
+    <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]>
+      <i class="fa fa-close"></i> Close
+    </button>
+  </div>
+</form>

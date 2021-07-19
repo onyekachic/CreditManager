@@ -1,0 +1,182 @@
+<form
+  #form="ngForm"
+  autocomplete="off"
+  *ngIf="creditService.formData"
+  (submit)="onSubmit(form)"
+>
+  <input
+    type="hidden"
+    name="creditID"
+    #creditID="ngModel"
+    [(ngModel)]="creditService.formData.creditID"
+  />
+
+  <card class="card mb-6">
+    <card class="card-body">
+      <div class="form-group">
+        <label>Creditor Name</label>
+        <select
+          name="customerID"
+          #customerID="ngModel"
+          [(ngModel)]="creditService.formData.customerID"
+          class="form-control"
+          [class.is-invalid]="
+            !isValid && creditService.formData.customerID == 0
+          "
+          (change)="updateCustomerDetail($event.target)"
+        >
+          <option value="0">-Select-</option>
+          <option
+            *ngFor="let item of customerList"
+            value="{{ item.customerID }}"
+          >
+            {{ item.contactName }}
+          </option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Credit No</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">CN</div>
+              </div>
+              <input
+                name="creditNo"
+                #creditNo="ngModel"
+                [(ngModel)]="creditService.formData.creditNo"
+                class="form-control"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Group Name</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">GN</div>
+            </div>
+            <input
+              name="groupName"
+              #groupName="ngModel"
+              [(ngModel)]="creditService.formData.groupName"
+              class="form-control"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Credit Amount</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">CA</div>
+            </div>
+            <input
+              name="amount"
+              #amount="ngModel"
+              [(ngModel)]="creditService.formData.amount"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Grand Total</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">GT</div>
+            </div>
+            <input
+              name="gTotal"
+              #gTotal="ngModel"
+              [(ngModel)]="creditService.formData.gTotal"
+              class="form-control"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+    </card>
+  </card>
+
+  <!--Credit Item table-->
+  <card class="card mt-2">
+    <card class="card-body">
+      <table class="table table-borderless">
+        <thead class="thead thead-light">
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Transport</th>
+            <th>OfficeMgt</th>
+            <th>Default</th>
+            <th>Others</th>
+            <th>Total</th>
+            <th>
+              <a
+                href=""
+                class="btn btn-sm btn-success text-white"
+                (click)="
+                  $event.preventDefault();
+                  AddOrEditCreditItem(null, creditService.formData.creditID)
+                "
+                ><i class="fa fa-plus">Add Item</i></a
+              >
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngIf="creditService.creditPayItems.length == 0"
+            colspan="5"
+            [class.text-danger]="
+              !isValid && creditService.creditPayItems.length == 0
+            "
+          >
+            <td class="font-italic text-center">No Credit</td>
+          </tr>
+          <tr *ngFor="let item of creditService.creditPayItems; let i = index">
+            <td>{{ i }}</td>
+            <td>{{ item.repayAmt }}</td>
+            <td>{{ item.pension }}</td>
+            <td>{{ item.union }}</td>
+            <td>{{ item.school }}</td>
+            <td>{{ item.others }}</td>
+            <td>{{ item.total }}</td>
+
+            <td>
+              <div>
+                <a
+                  class="btn btn-sm btn-info text-white"
+                  (click)="
+                    AddOrEditCreditItem(i, creditService.formData.creditID)
+                  "
+                >
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a
+                  class="btn btn-sm btn-danger text-white ml-1"
+                  (click)="onDeleteCreditItem(item.creditPayItemID, i)"
+                >
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </card>
+  </card>
+  <div class="for-group mt-4">
+    <button type="submit" class="btn btn-dark">
+      <i class="fa fa-database"></i> Submit
+    </button>
+    <a class="btn btn-outline-dark ml-1" routerLink="/credits"
+      ><i class="fa fa-plus-table"></i> View Credits</a
+    >
+  </div>
+</form>

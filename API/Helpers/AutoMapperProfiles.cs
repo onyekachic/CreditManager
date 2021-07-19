@@ -24,6 +24,19 @@ namespace API.Helpers
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => 
                     src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
             CreateMap<MessageDto, Message>();
+            CreateMap<CustomerDto, Customer>();
+            CreateMap<Customer, CustomerDto>();
+            CreateMap<Credit, CreditDto>();
+            CreateMap<CreditPayItem, CreditPayItemDto>();
+
+            //  CreateMap<Credit, CreditDto>()
+            //      .ForMember(dest => dest.GTotal, opt => opt.MapFrom(src 
+            //      => src.GTotal.HasValue ? src.GTotal.Value.ToString() : string.Empty));
+        
+            // CreateMap<CreditDto, Credit>()
+            //      .ForMember(dest => dest.GTotal, opt => opt.MapFrom(src 
+            //      => src.GTotal.HasValue ? src.GTotal.Value.ToString() : string.Empty));
+
         }
     }
 }

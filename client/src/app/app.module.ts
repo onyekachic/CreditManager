@@ -33,6 +33,16 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { LoansComponent } from './loans/loans.component';
+import { LoanComponent } from './loans/loan/loan.component';
+import { LoanpayItemsComponent } from './loans/loanpay-items/loanpay-items.component';
+import { CustomerItemComponent } from './customers/customer-item/customer-item.component';
+import { CustomersComponent } from './customers/customers.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CreditsComponent } from './credits/credits.component';
+import { CreditComponent } from './credits/credit/credit.component';
+import { CreditpayItemComponent } from './credits/creditpay-item/creditpay-item.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +68,15 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    LoansComponent,
+    LoanComponent,
+    LoanpayItemsComponent,
+    CustomersComponent,
+    CustomerItemComponent,
+    CreditsComponent,
+    CreditComponent,
+    CreditpayItemComponent
   ],
   imports: [
     BrowserModule,
@@ -69,12 +87,13 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     ReactiveFormsModule,
     SharedModule,
     NgxSpinnerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

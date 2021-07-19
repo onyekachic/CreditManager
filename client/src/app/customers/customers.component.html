@@ -1,0 +1,58 @@
+<table class="table table-hover">
+  <tr>
+    <!-- <th>ID</th> -->
+    <th>Customer Name</th>
+    <th>Address</th>
+    <th>Phone</th>
+    <th>Group Name</th>
+
+    <th>
+      <button
+        type="submit"
+        class="btn btn-outline-dark"
+        (click)="$event.preventDefault(); AddOrEditCustomerItem(null)"
+      >
+        <i class="fa fa-plus"></i> Add
+      </button>
+    </th>
+  </tr>
+  <tbody>
+    <tr *ngFor="let item of customerList; let i = index">
+      <!-- <th>{{ item.customerID }}</th> -->
+      <td>{{ item.contactName }}</td>
+      <td>{{ item.address }}</td>
+      <td>{{ item.phone }}</td>
+      <td>{{ item.groupName }}</td>
+      <td>
+        <button
+          class="btn btn-primary text-white"
+          (click)="AddOrEditCustomerItem(item.customerID)"
+        >
+          <i class="fa fa-pencil"></i> Edit
+        </button>
+
+        <button
+          class="btn btn-dark text-white ml-1"
+          (click)="onDelete(item.customerID)"
+        >
+          <i class="fa fa-trash"></i> Del
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-left" *ngIf="pagination">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

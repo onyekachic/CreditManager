@@ -41,6 +41,7 @@ export class MembersService {
   }
 
   getMembers(userParams: UserParams) {
+    
     var response = this.memberCache.get(Object.values(userParams).join('-'));
     if (response) {
       return of(response);
@@ -98,5 +99,5 @@ export class MembersService {
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params, this.http);
   }
 
-  
+
 }

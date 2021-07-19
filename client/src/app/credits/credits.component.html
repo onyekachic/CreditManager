@@ -1,0 +1,49 @@
+<table class="table table-hover">
+  <thead class="thead thead-light">
+    <tr>
+      <th>ID</th>
+      <th>Credit No</th>
+      <th>Customer Name</th>
+      <th>GroupName</th>
+      <th>Amount</th>
+      <th>G. Total</th>
+      <th>
+        <a class="btn btn-outline-success" routerLink="/credit"
+          ><i class="fa fa-plus-square"></i> Create New</a
+        >
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of creditList">
+      <th (click)="openForEdit(item.creditID)">{{ item.creditID }}</th>
+      <th (click)="openForEdit(item.creditID)">{{ item.creditNo }}</th>
+      <td (click)="openForEdit(item.creditID)">
+        {{ item.customer.contactName }}
+      </td>
+      <td (click)="openForEdit(item.creditID)">{{ item.groupName }}</td>
+      <td (click)="openForEdit(item.creditID)">{{ item.amount }}</td>
+      <td (click)="openForEdit(item.creditID)">{{ item.gTotal }}</td>
+      <td>
+        <a class="btn text-danger" (click)="onCreditDelete(item.creditID)"
+          ><i class="fa fa-trash fa-lg"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-left" *ngIf="pagination">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>
